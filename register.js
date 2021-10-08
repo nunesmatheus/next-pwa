@@ -11,20 +11,20 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator && typeof cach
 
   window.workbox = new Workbox(__PWA_SW__, { scope: __PWA_SCOPE__ })
 
-  if (__PWA_START_URL__) {
-    window.workbox.addEventListener('installed', async ({isUpdate}) => {
-      if (!isUpdate) {
-        const cache = await caches.open('start-url')
-        const response = await fetch(__PWA_START_URL__)
-        let _response = response
-        if (response.redirected) {
-          _response = new Response(response.body, {status: 200, statusText: 'OK', headers: response.headers})
-        }
+  // if (__PWA_START_URL__) {
+  //   window.workbox.addEventListener('installed', async ({isUpdate}) => {
+  //     if (!isUpdate) {
+  //       const cache = await caches.open('start-url')
+  //       const response = await fetch(__PWA_START_URL__)
+  //       let _response = response
+  //       if (response.redirected) {
+  //         _response = new Response(response.body, {status: 200, statusText: 'OK', headers: response.headers})
+  //       }
 
-        await cache.put(__PWA_START_URL__, _response)
-      }
-    })
-  }
+  //       await cache.put(__PWA_START_URL__, _response)
+  //     }
+  //   })
+  // }
 
   window.workbox.addEventListener('installed', async () => {
       const data = window.performance.getEntriesByType('resource').map(e => e.name).filter(n => n.startsWith(`${window.location.origin}/_next/data/`) && n.endsWith('.json'))
