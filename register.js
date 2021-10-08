@@ -1,13 +1,13 @@
 import { Workbox } from 'workbox-window'
 
 if (typeof window !== 'undefined' && 'serviceWorker' in navigator && typeof caches !== 'undefined') {
-  if (__PWA_START_URL__) {
-    caches.has('start-url').then(function(has) {
-      if (!has) {
-        caches.open('start-url').then(c => c.put(__PWA_START_URL__, new Response('', {status: 200})))
-      }
-    })
-  }
+  // if (__PWA_START_URL__) {
+  //   caches.has('start-url').then(function(has) {
+  //     if (!has) {
+  //       caches.open('start-url').then(c => c.put(__PWA_START_URL__, new Response('', {status: 200})))
+  //     }
+  //   })
+  // }
 
   window.workbox = new Workbox(__PWA_SW__, { scope: __PWA_SCOPE__ })
 
